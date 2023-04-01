@@ -1,0 +1,2 @@
+@stack('posts')
+@stack('companies')
