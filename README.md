@@ -27,6 +27,7 @@ npm install
 5. Run the following command to compile the assets: 
 npm run dev
 
+6. Import sustainablestar.sql to phpmyadmin
 
 ## Usage
 
