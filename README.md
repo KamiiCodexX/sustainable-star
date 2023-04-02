@@ -16,7 +16,7 @@ To run this project, you must have the following software installed on your syst
 
 To install the project, please follow the steps below:
 
-1. Clone the repository to your local machine using `git clone https://github.com/username/repo.git`
+1. Clone the repository to your local machine using `git clone https://github.com/KamiiCodexX/sustainable-star.git`
 2. Navigate to the project directory using the command line or terminal
 3. Run the following command to install the PHP dependencies: 
 composer install
