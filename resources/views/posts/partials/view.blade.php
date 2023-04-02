@@ -1,4 +1,5 @@
 
+@if(!empty($post))
 <div id="post-number-{{$post['id']}}" class="card mt-3">
     <div class="card-header">
         <div class="row">
@@ -8,8 +9,7 @@
                     @php
                         $date = date_create($post['created_at']);
                     @endphp
-                    <span>{{ $post['user']['name'] }}</span> posted on
-                    <span class="">{{ date_format($date, 'j F, Y') }} at {{ date_format($date, 'H:i.') }}</span>
+                    <span>{{ date_format($date ?? date("Y-m-d"), 'j F, Y') }} at {{ date_format($date ?? date("Y-m-d"), 'H:i.') }}</span>
                 </h5>
             </div>
             <div class="col-sm-4">
@@ -38,3 +38,4 @@
         </div>
     </div>
 </div>
+@endif

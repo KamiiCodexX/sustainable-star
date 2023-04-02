@@ -58,7 +58,7 @@ class CompanyController extends Controller
     {
         try {
             $input = $request->except('_token');
-            $delegates = $input['delegates'];
+            $delegates = $input['delegates'] ?? [];
             unset($input['delegates']);
 
             $company = Company::create($input);
