@@ -1,4 +1,4 @@
-# sustainablestar
+# Sustainable Star Task
 A task given by sustainable star.
 
 Requirements:
