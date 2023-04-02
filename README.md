@@ -9,8 +9,11 @@ Requirements:
   node v16.17.0. 
 
 Install the requirements and run following command in cmd with Project directory opened:
+  
   composer install, 
+  
   npm install, 
+  
   npm run dev.
 
 Start your local server (using lamp, xampp, mamp, etc) and access the project using right url:
