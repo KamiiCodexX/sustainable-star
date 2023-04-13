@@ -33,8 +33,9 @@ npm run dev
 
 To use the project, please follow the steps below:
 
-1. Start your local server (using LAMP, XAMPP, MAMP, etc)
-2. Access the project using the following URL: http://localhost/sustainable-star/public/
+1. Make migrations through: php artisan migrate
+2. Start your local server (using LAMP, XAMPP, MAMP, etc)
+3. Access the project using the following URL: http://localhost/sustainable-star/public/
 
 ## Contributing
 
