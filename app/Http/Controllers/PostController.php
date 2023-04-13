@@ -30,9 +30,14 @@ class PostController extends Controller
     public function store(Request $request)
     {
         try {
-            $input = $request->except('_token');
 
-            $post = Post::create($input);
+            $request->validate([
+                'owner_id' => 'bail|required',
+                'posted_by' => 'required',
+                'text' => 'required|max:5000',
+            ]);
+
+            $post = Post::create($request->except('_token'));
             $html = view('posts.partials.view', compact('post'))->render();
 
             if ($post) {

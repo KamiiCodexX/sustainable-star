@@ -14,22 +14,22 @@
                         @csrf
                         <div class="row">
                             <div class="col-sm-6">
-                                <input name="owner_id" id="owner_id" type="hidden" value="{{ Auth::id() }}" >
+                                <input name="company[owner_id]" id="owner_id" type="hidden" value="{{ Auth::id() }}" >
 
                                 <label class="col-form-label" for="name">Name<span class="requiredInput">*</span></label>
-                                <input required name="name" id="name" type="text" class="form-control" placeholder="Enter Name" >
+                                <input required name="company[name]" id="name" type="text" class="form-control" placeholder="Enter Name" >
 
                                 <label class="col-form-label" for="contact">Contact No:<span class="requiredInput">*</span></label>
-                                <input required name="contact" id="contact" type="text" class="form-control" placeholder="Enter Contact Number" >
+                                <input required name="company[contact]" id="contact" type="text" class="form-control" placeholder="Enter Contact Number" >
                             </div>
 
                             <div class="col-sm-6">
                                 <label class="col-form-label" for="email">Email<span class="requiredInput">*</span></label>
-                                <input required name="email" id="email" type="email" class="form-control" placeholder="Enter Email" >
+                                <input required name="company[email]" id="email" type="email" class="form-control" placeholder="Enter Email" >
 
 
                                 <label class="col-form-label" for="country">Country</label>
-                                <select name="country" id="country" class="form-control js-example-basic-single">
+                                <select name="company[country]" id="country" class="form-control js-example-basic-single">
                                     <option value="">Select a Country</option>
                                     <option value="ksa">Saudi Arabia</option>
                                     <option value="ku">Kuwait</option>
@@ -50,12 +50,12 @@
 
                             <div class="col-sm-12">
                                 <label class="col-form-label" for="description">Description</label>
-                                <textarea name="description" id="description" class="form-control" placeholder="Enter Description of your Company" ></textarea>
+                                <textarea name="company[description]" id="description" class="form-control" placeholder="Enter Description of your Company" ></textarea>
                             </div>
 
                             <div class="col-sm-12">
                                 <label class="col-form-label" for="logo">Logo</label>
-                                <input type="file" class="form-control" name="logo" id="logo" accept=".jpeg,.png,.jpg">
+                                <input type="file" class="form-control" name="company[logo]" id="logo" accept=".jpeg,.png,.jpg">
                             </div>
 
                             <div class="col-sm-12">

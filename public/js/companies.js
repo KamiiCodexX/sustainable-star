@@ -16,7 +16,7 @@ function getCompanies()
         headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: "http://localhost/sustainablestar/public/companies/get-companies",
+        url: "http://localhost/sustainable-star/public/companies/get-companies",
         type: 'GET',
         success: function (result) {
 
@@ -54,7 +54,7 @@ $(document).on('submit', '#add-company-form', function (e) {
         let formData = $("#add-company-form").serialize();
         // console.log(formData);
         $.ajax({
-            url: "http://localhost/sustainablestar/public/companies/store",
+            url: "http://localhost/sustainable-star/public/companies/store",
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
@@ -103,7 +103,7 @@ $(document).on('click', '.delete-companies', function(){
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: "http://localhost/sustainablestar/public/companies/delete",
+            url: "http://localhost/sustainable-star/public/companies/delete",
             type: 'POST',
             data: {
                 id: data_id

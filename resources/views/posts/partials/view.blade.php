@@ -9,7 +9,15 @@
                     @php
                         $date = date_create($post['created_at']);
                     @endphp
-                    <span>{{ date_format($date ?? date("Y-m-d"), 'j F, Y') }} at {{ date_format($date ?? date("Y-m-d"), 'H:i.') }}</span>
+
+                    <span>
+                        @if(isset($post['user']))
+                            {{ $post['user']['name'] }}
+                        @elseif(isset($post['company']))
+                            {{ $post['company']['name'] }}
+                        @endif
+                    </span> posted on
+                    <span class="">{{ date_format($date, 'j F, Y') }} at {{ date_format($date, 'H:i.') }}</span>
                 </h5>
             </div>
             <div class="col-sm-4">

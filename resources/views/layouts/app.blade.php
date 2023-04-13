@@ -65,11 +65,16 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    @if(session()->has('current_company'))
+                                        {{ session()->get('current_company')->name }}
+                                    @else
+                                        {{ Auth::user()->name }}
+
+                                    @endif
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    @if(str_contains(Request::url(), 'home'))
+                                    @if(str_contains(Request::url(), 'home') && !session()->has('current_company'))
                                     <a class="dropdown-item" href="{{ route('companies.list') }}">
                                         Companies
                                     </a>

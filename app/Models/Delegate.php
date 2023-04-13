@@ -30,6 +30,11 @@ class Delegate extends Authenticatable
         return $this->hasOne('App\Models\User', 'id', 'user_id');
     }
 
+    public function company()
+    {
+        return $this->hasOne('App\Models\Company', 'id', 'company_id');
+    }
+
     public function permissions()
     {
         return $this->hasOne('App\Models\Permission', 'delegates_id', 'id');

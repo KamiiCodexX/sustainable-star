@@ -19,20 +19,20 @@ class Post extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'user_id',
-        'company_id',
+        'owner_id',
         'text',
+        'posted_by',
         'updated_at',
     ];
 
     public function user()
     {
-        return $this->belongsTo("App\Models\User", 'user_id', 'id');
+        return $this->belongsTo("App\Models\User", 'owner_id', 'id');
     }
 
     public function company()
     {
-        return $this->belongsTo('App\Models\Company', 'company_id', 'id');
+        return $this->belongsTo('App\Models\Company', 'owner_id', 'id');
     }
 
 }

@@ -28,19 +28,13 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies = Company::with('owner')->where("owner_id", Auth::id())->get()->toArray();
-        // dd($companies);
-        // dd($users);
+        $companies = Company::with('owner')->where("owner_id", Auth::id())->limit(10)->get()->toArray();
         return view('companies.list', compact('companies'));
     }
 
     public function add()
     {
-        // $companies = Company::with('owner')->where("owner_id", Auth::id())->get()->toArray();
-        $users = User::all()->except(Auth::id())->toArray();
-
-        // dd($companies);
-        // dd($users);
+        $users = User::whereNot('id', Auth::id())->get()->toArray();
         return view('companies.add', compact('users'));
     }
 
@@ -57,17 +51,23 @@ class CompanyController extends Controller
     public function store(Request $request)
     {
         try {
-            $input = $request->except('_token');
-            $delegates = $input['delegates'] ?? [];
-            unset($input['delegates']);
 
-            $company = Company::create($input);
-            (new Delegate())->storeDelegates($delegates, $company->id);
+            $request->validate([
+                'company.owner_id' => 'bail|required',
+                'delegates.id' => 'bail|required',
+                'company.name' => 'required',
+                'company.contact' => 'required|max:5000',
+                'company.email' => 'required|max:255',
+            ]);
+
+            $company = Company::create($request->get('company'));
+            (new Delegate())->storeDelegates($request->get('delegates'), $company->id);
             if ($company) {
                 return response()->json(['success' => true, 'title' => 'success', 'type' => 'success', 'message' => 'Company added Successfully.']);
-            } else {
-                return response()->json(['success' => false, 'title' => 'success', 'type' => 'error', 'message' => 'Something went Wrong.']);
             }
+
+            return response()->json(['success' => false, 'title' => 'success', 'type' => 'error', 'message' => 'Something went Wrong.']);
+
         } catch (\Throwable $ex) {
             return response()->json(['success' => false, 'message' => $ex->getMessage() . ' on line ' . $ex->getLine() . ' on file ' . $ex->getFile()]);
         }
@@ -76,10 +76,10 @@ class CompanyController extends Controller
     public function deleteCompanies(Request $request)
     {
         try {
-            $id = $request['id'];
-            $delete = Company::where('id', $id)->delete();
-            if ($delete) {
-                $delete = Delegate::where('company_id', $id)->delete();
+            $id = $request->get('id');
+            Delegate::where('company_id', $id)->delete();
+
+            if (Company::where('id', $id)->delete()) {
                 return response()->json(['success' => true, 'message' => 'Company Deleted Successfully!', 'type' => 'success', 'title' => 'Success!']);
             }
 
@@ -111,7 +111,6 @@ class CompanyController extends Controller
             $input = $request->except('_token');
             $delete = Permission::where(['delegates_id' => $input['delegates_id'], 'owner_id' => $input['owner_id']])->delete();
 
-
             $permissions = Permission::create([
                 "owner_id" => $input['owner_id'],
                 "delegates_id" => $input['delegates_id'],
@@ -137,7 +136,7 @@ class CompanyController extends Controller
             if (empty($check)) {
                 $delegates = Delegate::create($input);
             } else {
-                return response()->json(['success' => false, 'title' => 'success', 'type' => 'error', 'message' => 'Already Exist.']);
+                return response()->json(['success' => false, 'title' => 'success', 'type' => 'error', 'message' => 'Delegate Already Exist.']);
             }
             if ($delegates) {
                 return response()->json(['success' => true, 'title' => 'success', 'type' => 'success', 'message' => 'Delegates added Successfully.']);
@@ -147,5 +146,18 @@ class CompanyController extends Controller
         } catch (\Throwable $ex) {
             return response()->json(['success' => false, 'message' => $ex->getMessage() . ' on line ' . $ex->getLine() . ' on file ' . $ex->getFile()]);
         }
+    }
+
+    public function switchCompany(Request $request)
+    {
+        $company = Company::findOrFail($request->input('company_id'));
+        session()->put('current_company', $company);
+        return redirect()->back();
+    }
+
+    public function switchUser(Request $request)
+    {
+        $request->session()->forget('current_company');
+        return redirect()->back();
     }
 }

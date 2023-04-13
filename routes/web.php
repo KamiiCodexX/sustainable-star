@@ -21,6 +21,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/switch-company', [App\Http\Controllers\CompanyController::class, 'switchCompany'])->name('switch-company');
+Route::get('/switch-user', [App\Http\Controllers\CompanyController::class, 'switchUser'])->name('switch-user');
+
 // Route::get('/companies', [App\Http\Controllers\CompanyController::class, 'index'])->name('companies');
 Route::group(['prefix' => 'companies', 'as' => 'companies.'], function () {
     // Route::get('/', ['as' => 'list', 'uses' => 'CompanyController@index']);
@@ -32,6 +35,9 @@ Route::group(['prefix' => 'companies', 'as' => 'companies.'], function () {
     Route::post('/storePermissions', [App\Http\Controllers\CompanyController::class, 'storePermissions'])->name('storePermissions');
     Route::post('/storeDelegates', [App\Http\Controllers\CompanyController::class, 'storeDelegates'])->name('storeDelegates');
     Route::post('/deleteDelegates', [App\Http\Controllers\CompanyController::class, 'deleteDelegates'])->name('deleteDelegates');
+
+
+
 
     // Route::get('/add', ['as' => 'add', 'uses' => 'CompanyController@index']);
     // Route::post('list-queries/json', ['as' => 'list_queries.json', 'uses' => 'CustomerQueriesController@listContactusQueriesJson']);

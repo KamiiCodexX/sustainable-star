@@ -36,7 +36,7 @@ $(document).on('submit', '#create-post', function (e) {
         let formData = $("#create-post").serialize();
         // console.log(formData);
         $.ajax({
-            url: "http://localhost/sustainablestar/public/posts/store",
+            url: "http://localhost/sustainable-star/public/posts/store",
             global: false,
             method: "POST",
             dataType: 'json',
@@ -87,7 +87,7 @@ $(document).on('click', '.remove-permission', function(){
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: "http://localhost/sustainablestar/public/companies/deleteDelegates",
+            url: "http://localhost/sustainable-star/public/companies/deleteDelegates",
             type: 'POST',
             data: {
                 id: delegateID
@@ -119,7 +119,7 @@ $(document).on('submit', 'form[id^="manage-permissions-"]', function (e) {
         headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: "http://localhost/sustainablestar/public/companies/storePermissions",
+        url: "http://localhost/sustainable-star/public/companies/storePermissions",
         global: false,
         method: "POST",
         dataType: 'json',
@@ -145,7 +145,7 @@ $(document).on('submit', 'form[id^="allow-permission-"]', function (e) {
         headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: "http://localhost/sustainablestar/public/companies/storeDelegates",
+        url: "http://localhost/sustainable-star/public/companies/storeDelegates",
         global: false,
         method: "POST",
         dataType: 'json',
